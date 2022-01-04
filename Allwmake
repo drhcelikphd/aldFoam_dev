@@ -1,0 +1,25 @@
+#!/bin/bash
+cd ${0%/*} || exit 1    # Run from this directory
+
+
+
+OF_VER=8
+
+check_openfoam()
+{
+    if [ -z ${WM_PROJECT} ]; then 
+        echo "OpenFOAM environment not set."
+        exit 1
+    fi
+    
+    echo "OpenFOAM version is: $WM_PROJECT_VERSION "  
+    
+}
+
+
+check_openfoam
+
+wmake firstorder
+wmake dose
+wmake aldFoam
+
